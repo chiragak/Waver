@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 
 //Include medoo which is being utilized for interacting with the database
 require 'Medoo.php';

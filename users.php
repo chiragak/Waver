@@ -1,4 +1,11 @@
 <?php
+session_start();
+$gmail=$_SESSION['sesname'];
+   if($gmail==''){
+       header("location: loginpage.php");
+        exit();
+   }
+      
 //Include medoo which is being utilized for interacting with the database
 require 'Medoo.php';
 //Now use Medoo's namespace
@@ -7,7 +14,7 @@ use Medoo\Medoo;
 //Modify these settings to match your own configuration.
 $database = new Medoo(['database_type' => 'mysql', 'database_name' => 'attendancesystem', 'server' => 'localhost', 'username' => 'root', 'password' => 'raspberrypi']);
 //Grab all the users from our database
-$users = $database->select("users", ['id', 'name', 'rfid_uid', 'user_email', 'created']);
+$users = $database->select("users", ['id', 'name', 'rfid_uid', 'user_email', 'created','access']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,16 +122,14 @@ container.mt-3{
 
     <nav class="navbar" style="background-color:#3C3F58">
           <div class="container">
-    <a href="#" class="navbar-brand">
+    <a href="index.php" class="navbar-brand">
       <!-- Logo Image -->
-      <img src="https://user-images.githubusercontent.com/70628014/172147864-479bfb31-260e-4709-b63c-08bda0b2369f.gif" width="100" alt="" class="d-inline-block align-middle mr-2">
+      <img src="images/logo.gif" width="100" alt="" class="d-inline-block align-middle mr-2">
 
     </a>
        <!-- <a class="" href="#" >Attendance System</a> -->
         <ul class="nav nav-pills" style="margin-right: 3%;">
-            <li class="nav-item">
-                <a href="attendance.php" class="nav-link" style="background-color:#4f94cd; color:white; padding-left: 20px;">View Attendance</a>
-            </li> &nbsp;&nbsp;
+           
             <li class="nav-item">
                 <a href="users.php" class="nav-link " style="background-color:#4f94cd; color:white">View Users</a>
             </li>
@@ -139,13 +144,7 @@ container.mt-3{
        <div class="row">
         
              <div class="col-md-12">
-             
-             
-             
-             
-             
-             
-             
+
              
                 <div id="app" class="container" style="background-color: #D76786; width: 98.1%;">
 <h3 class="mt-3">Add User</h3>
@@ -167,6 +166,13 @@ container.mt-3{
     <label>User Email</label>
     <input type="email" name="email" required autocomplete="off" class="form-control" value="">
   </div>
+  <!--  dropdown menu -->
+   <div class="col">
+   <select name="acess" id="sel_user" >
+        <option value="admin">Admin</option>
+        <option value="user">User</option>       
+      </select>
+      </div>
 
   </div>
     <button class="custom-btn btn-1" name="button" type="submit">Submit</button>
@@ -188,12 +194,13 @@ container.mt-3{
 
         <div class="row">
             <div class="col">
-            <h2 style="color:black;background-color:#fcedfa; text-align:center">Users</h2>
-                
+            <h2 style="color:black;background-color:#fcedfa; text-align:center">Users </h2>
+             
         </div>
         </div>
         
-        <table class="table table-striped table-danger">
+      <a href="usersdata.php" class="nav-link " style="background-color:#4f94cd; color:white">Print data</a>     
+         <table class="table table-striped table-danger">
             
             <thead class="table-dark">
 
@@ -203,7 +210,9 @@ container.mt-3{
                     <th scope="col">RFID UID</th>
                      <th scope="col">Email Id</th>
                     <th scope="col">created</th>
+                     <th scope="col">Access</th>
                     <th scope="col">Action</th>
+                   
 
                 </tr>
             </thead>
@@ -221,7 +230,9 @@ foreach ($users as $user) {
     //echo  '<td>'."<a href='#' onclick='popup($id)'> Delete</a>".'</td>';
     //echo  '<td>'."<a href='delete.php?id=$id'> Delete</a>".'</td>';
     //echo '<td>' . ' <button onclick="toggle()">Delete</button> '.'</td>';
+     echo '<td><b>' . $user['access'] . '</b></td>';
    echo "<td> <a style='background-color:tomato; color:white;padding:10px' href='delete.php?id=$id' onClick=\"return confirm('Are you sure you want to delete this user ?');\">Delete</center></a></td>";
+  
     echo '</tr>';
 }
 ?>

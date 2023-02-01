@@ -1,5 +1,12 @@
 <?php
-
+session_start();
+$gmail=$_SESSION['sesname'];
+$page= $_SESSION['page'];
+   if($gmail==''){
+       header("location: loginpage.php");
+        exit();
+   }
+      
 //Include medoo which is being utilized for interacting with the database
 require 'Medoo.php';
 
@@ -47,18 +54,8 @@ $users1 = $database->select("users", [
     <body>
 
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Attendance System</a>
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a href="attendance.php" class="nav-link">View Attendance</a>
-            </li>
-            <li class="nav-item">
-                <a href="users.php" class="nav-link active">View Users</a>
-            </li>
-            <li class="nav-item">
-                <a href="display.php" class="nav-link active">Diaplay All</a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="<?php echo $page ?>">Attendance System</a>
+      
     </nav>
     <div class="container">
         <div class="row">
@@ -68,7 +65,7 @@ $users1 = $database->select("users", [
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">user_id</th>
+                   
                     <th scope="col">name</th>
                     <th scope="col">clock_in</th>
                     <th scope="col">clock_out</th>
@@ -85,8 +82,8 @@ $users1 = $database->select("users", [
 								
                     echo '<tr>';
 					echo '<td scope="row">' . $user['id'] . '</td>';
-                    echo '<td scope="row">' . $user['user_id'] . '</td>';
-                     echo '<td scope="row">' .$user['name']. '</td>';
+                   
+                    echo '<td scope="row">' .$user['name']. '</td>';
                     echo '<td>' . $user['clock_in'] . '</td>';
                     echo '<td>' . $user['clock_out'] . '</td>';
                      echo '<td>' . $user['total_time_daily'] . '</td>';

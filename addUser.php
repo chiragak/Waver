@@ -1,17 +1,17 @@
 <?php
-
+//Block 1
 $user = "root"; //Enter the user name
 $password = "raspberrypi"; //Enter the password
 $host = "localhost"; //Enter the host
 $dbase = "attendancesystem"; //Enter the database
 $table = "users"; //Enter the table name
-
-
+//Block 2
 $id = $_POST['id'];
 $name = $_POST['name'];
 $email = $_POST['email'];
+$access= $_POST['acess'];
 
-
+//Block 3
 $connection = mysqli_connect($host, $user, $password, $dbase);
 if (!$connection)
 {
@@ -24,9 +24,9 @@ else
     echo "connected to database";
 }
 
-
-$sql = "INSERT INTO $table (rfid_uid, name, user_email)
-VALUES ('$id', '$name', '$email')";
+//Block 5
+$sql = "INSERT INTO $table (rfid_uid, name, user_email,access)
+VALUES ('$id', '$name', '$email','$access')";
 
 if (mysqli_query($connection, $sql))
 {
@@ -42,5 +42,12 @@ else
 }
 
 mysql_close($connection);
+
+//Block 6
+
+
+//Block 7
+
+
 
 ?>

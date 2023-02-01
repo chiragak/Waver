@@ -1,4 +1,13 @@
 <?php
+session_start();
+$gmail=$_SESSION['sesname'];
+$page= $_SESSION['page'];
+
+   if($gmail==''){
+       header("location: loginpage.php");
+        exit();
+   }
+      
 require 'common.php';
 
 //Grab all users from our database
@@ -35,20 +44,9 @@ $num_days = cal_days_in_month(CAL_GREGORIAN, $current_month, $current_year);
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/website-as/users.php#">Attendance System</a>
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a href="attendance.php" class="nav-link active">View Attendance</a>
-            </li>
-            <li class="nav-item">
-                <a href="users.php" class="nav-link">View Users</a>
-            </li>
-             <li class="nav-item">
-                <a href="display.php" class="nav-link active">Diaplay All</a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="<?php echo $page ?>">Attendance System</a>
+    
     </nav>
     <div class="container">
         <div class="row">
@@ -97,7 +95,7 @@ $num_days = cal_days_in_month(CAL_GREGORIAN, $current_month, $current_year);
                                 echo '</td>';
                             } else {
                                 //If there was nothing in the database notify the user of this.
-                                echo '<td class="table-secondary">No Data Available</td>';
+                                echo '<td class="table-secondary">baije </td>';
                             }
                         }
                         echo '</tr>';
