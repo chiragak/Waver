@@ -104,21 +104,7 @@ position: absolute;
     font-size: large;
 
 }
-input:focus 
-{
-    outline: none;   
-}
-.eye
-{
-    position: absolute;
-    margin-top: 84px;
-    margin-left:380px;
-}
 
-
-.eye:hover {
-  transform: scale(1.1);
-}
 		</style>
 	</head>
 	<body>
@@ -129,8 +115,9 @@ input:focus
 				<div class="input-box">
 					<input class="in-text" type="text" name="" required="required" placeholder="Enter Username" />
                     <!-- <input class="in-text" type="password" name="" required="required" placeholder="Enter the password" /> -->
-                    <input class="in-text" type="password" value="FakePSW" id="myInput" placeholder="Enter the password">
-                    <img  class="eye" src="images/eye.png" width="25px" onclick="myFunction()" alt="Show password">
+                    <input type="password" placeholder="Password" id="password">
+                    <img src="pass-hide.png" onclick="pass()" class="pass-icon" id="pass-icon">
+
 
                     <div class="bottom">
                     <label class="check">
