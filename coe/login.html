@@ -3,6 +3,26 @@
 	<head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 		<title>Login</title>
+        <script>
+            
+var a;
+function pass()
+{
+if(a==1)
+{
+document.getElementById('password').type='password';
+document.getElementById('pass-icon').src='images/pass-hide.png';  
+a=0;
+}
+else
+{
+document.getElementById('password').type='text';
+document.getElementById('pass-icon').src='images/pass-show.png';
+a=1;    
+}
+}
+</script>
+        </script>
 		<style>
 			        body
 			        {
@@ -104,7 +124,14 @@ position: absolute;
     font-size: large;
 
 }
-
+.pass-icon
+{
+    position: absolute;
+    top: 213px;
+    right: 350px;
+    width: 24px;
+    cursor: pointer;
+}
 		</style>
 	</head>
 	<body>
@@ -115,8 +142,9 @@ position: absolute;
 				<div class="input-box">
 					<input class="in-text" type="text" name="" required="required" placeholder="Enter Username" />
                     <!-- <input class="in-text" type="password" name="" required="required" placeholder="Enter the password" /> -->
-                    <input type="password" placeholder="Password" id="password">
-                    <img src="pass-hide.png" onclick="pass()" class="pass-icon" id="pass-icon">
+                    
+                    <input class="in-text" type="password" placeholder="Password" id="password">
+                    <img src="images/pass-hide.png"  width="40px" onclick="pass()" class="pass-icon" id="pass-icon">
 
 
                     <div class="bottom">
