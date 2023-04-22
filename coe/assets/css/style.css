@@ -1,29 +1,11 @@
 ﻿
-/*=============================================================
-    Authour URL: www.designbootstrap.com
-
-    http://www.designbootstrap.com/
-
-    License: MIT
-
-    http://opensource.org/licenses/MIT
-
-    100% Free To use For Personal And Commercial Use.
-
-    IN EXCHANGE JUST TELL PEOPLE ABOUT THIS WEBSITE
-
-========================================================  */
-
-
-/* =============================================================
-   GENERAL STYLES
- ============================================================ */
 
 @import url(http://fonts.googleapis.com/css?family=Roboto); /* FREE GOOGLE FONT */
 
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
+    background-color:#00162E ;
 }
 
 .set-radius-zero {
@@ -41,9 +23,9 @@ body {
 .page-head-line {
     font-weight: 900;
     padding-bottom: 20px;
-    border-bottom: 2px solid #F0677C;
+    border-bottom: 2px solid white;
     text-transform: uppercase;
-    color: #F0677C;
+    color: white;
     font-size: 20px;
     margin-bottom: 40px;
 }
@@ -311,4 +293,13 @@ footer {
 
 .btn-google {
     background-color: #c32f10;
+}
+
+.panel-body 
+{
+    background-color:#012F47 ;
+}
+.panel-heading
+{
+    background-color: #194359
 }

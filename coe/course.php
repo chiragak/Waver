@@ -9,11 +9,11 @@ else{
 
 if(isset($_POST['submit']))
 {
-$coursecode=$_POST['coursecode'];
+
 $coursename=$_POST['coursename'];
 $courseunit=$_POST['courseunit'];
-$seatlimit=$_POST['seatlimit'];
-$ret=mysqli_query($bd, "insert into course(courseCode,courseName,courseUnit,noofSeats) values('$coursecode','$coursename','$courseunit','$seatlimit')");
+
+$ret=mysqli_query($bd, "insert into course(courseName,courseUnit) values('$coursename','$courseunit',)");
 if($ret)
 {
 $_SESSION['msg']="Course Created Successfully !!";
@@ -71,10 +71,6 @@ if(isset($_GET['del']))
 
                         <div class="panel-body">
                        <form name="dept" method="post">
-   <div class="form-group">
-    <label for="coursecode">Course Code  </label>
-    <input type="text" class="form-control" id="coursecode" name="coursecode" placeholder="Course Code" required />
-  </div>
 
  <div class="form-group">
     <label for="coursename">Course Name  </label>
@@ -86,10 +82,7 @@ if(isset($_GET['del']))
     <input type="text" class="form-control" id="courseunit" name="courseunit" placeholder="Course Unit" required />
   </div> 
 
-<div class="form-group">
-    <label for="seatlimit">Seat limit  </label>
-    <input type="text" class="form-control" id="seatlimit" name="seatlimit" placeholder="Seat limit" required />
-  </div>   
+
 
  <button type="submit" name="submit" class="btn btn-default">Submit</button>
 </form>
@@ -112,10 +105,8 @@ if(isset($_GET['del']))
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Course Code</th>
                                             <th>Course Name </th>
-                                            <th>Course Unit</th>
-                                            <th>Seat limit</th>
+                                            <th>Course Description</th>
                                              <th>Creation Date</th>
                                              <th>Action</th>
                                         </tr>
