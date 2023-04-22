@@ -3,6 +3,9 @@
 	<head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 		<title>Login</title>
+    <style>
+      
+    </style>
         <script>
             
 var a;
@@ -21,8 +24,51 @@ document.getElementById('pass-icon').src='images/pass-show.png';
 a=1;    
 }
 }
+
+
+
+
+
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+// check if the cookie exists and log the user in automatically if it does
+var storedUsername = getCookie("username");
+var storedPassword = getCookie("password");
+
+if (storedUsername && storedPassword) {
+  usernameInput.value = storedUsername;
+  passwordInput.value = storedPassword;
+  login();
+}
+
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+// set the cookie when the user logs in with "Remember Me" checkbox checked
+if (rememberMeCheckbox.checked) {
+  setCookie("username", username, 30); // expires in 30 days
+  setCookie("password", password, 30);
+}
+
 </script>
-        </script>
+        
 		<style>
 			        body
 			        {
@@ -148,9 +194,12 @@ position: absolute;
 
 
                     <div class="bottom">
-                    <label class="check">
+                    <label  class="check">
                         <input id="remember-check" type="checkbox" name="remember"> Remember me
                     </label>
+
+                    <!-- <label for="remember-me">Remember Me:</label>
+  <input type="checkbox" id="remember-me" name="remember-me"> -->
                       <a href="https://www.google.com/">Forgot password ?</a>
                     </div>
 				</div>
