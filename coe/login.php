@@ -173,7 +173,7 @@
 			.pass-icon
 			{
 			    position: absolute;
-			    top: 213px;
+			    top: 267px;
 			    right: 350px;
 			    width: 24px;
 			    cursor: pointer;
