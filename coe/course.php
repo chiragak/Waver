@@ -47,6 +47,13 @@ if(isset($_GET['del']))
         background-color:#194359;
         color:white;
     } 
+    #submit-button 
+    {
+        background-color:#66A499;
+        border-radius:7px;
+        float:right;
+        
+    }
    </style>
 </head>
 
@@ -91,7 +98,7 @@ if(isset($_GET['del']))
 
 
 
- <button type="submit" name="submit" class="btn btn-default">Submit</button>
+ <button id="submit-button" type="submit" name="submit" class="btn btn-default"><b>Submit</b></button>
 </form>
                             </div>
                             </div>
@@ -102,7 +109,7 @@ if(isset($_GET['del']))
                 <div class="col-md-12">
                     
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading" id="box-head">
                             Manage Course
                         </div>
                        
