@@ -41,6 +41,12 @@ if(isset($_GET['del']))
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+   <style>
+    .box-head
+    {
+        background-color:yellow;
+    } 
+   </style>
 </head>
 
 <body>
@@ -63,7 +69,7 @@ if(isset($_GET['del']))
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading box-head" >
                            Course 
                         </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>

@@ -23,9 +23,9 @@ body {
 .page-head-line {
     font-weight: 900;
     padding-bottom: 20px;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #85FFC7;
     text-transform: uppercase;
-    color: white;
+    color: #85FFC7;
     font-size: 20px;
     margin-bottom: 40px;
 }
@@ -298,8 +298,4 @@ footer {
 .panel-body 
 {
     background-color:#012F47 ;
-}
-.panel-heading
-{
-    background-color: #194359
 }
