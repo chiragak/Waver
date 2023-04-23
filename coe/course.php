@@ -54,11 +54,12 @@ if(isset($_GET['del']))
         float:right;
         
     }
+    
    </style>
 </head>
 
 <body>
-<?php include('includes/header.php');?>
+<!-- <?php include('includes/header.php');?> -->
     
 <?php if($_SESSION['alogin']!="")
 {
