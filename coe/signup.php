@@ -100,7 +100,7 @@
 			            }
 			            .bottom a{
 
-			                margin-top: 210px;
+			                margin-top: 270px;
 			                position: absolute;
 			                color: white;
 			                right: 0%;
@@ -142,10 +142,11 @@
 	</head>
 	<body>
 		<div class="login-box">
-			<h1>Log in</h1>
+			<h1>Sign up</h1>
 			<p>Welcome Back! Login to Continue</p>
 			<form action="">
 				<div class="input-box">
+				    <input class="in-text" type="text" name="gmail" required="required" placeholder="Enter Email" autocomplete="off" />
 					<input class="in-text" type="text" name="user-name" required="required" placeholder="Enter Username" autocomplete="off" />
 					<!-- <input class="in-text" type="password" name="" required="required" placeholder="Enter the password" /> -->
 
@@ -157,7 +158,7 @@
 					<div class="bottom">
 						<!-- <label for="remember-me">Remember Me:</label>
   <input type="checkbox" id="remember-me" name="remember-me"> -->
-						<a href="signup.html">Already have an account ? </a>
+						<a href="login.php">Already have an account ? </a>
 					</div>
 				</div>
 				<button class="submit">SIGN UP</button>
