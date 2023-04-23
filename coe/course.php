@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('./backend/dbconnect.php');
-$bd=$conn;
+
 $_SESSION['alogin']='connected';
 if(strlen($_SESSION['alogin'])==0)
     {   
@@ -15,7 +15,7 @@ if(isset($_POST['submit']))
 $coursename=$_POST['coursename'];
 $courseDesc=$_POST['courseDesc'];
 
-$ret=mysqli_query($bd, "insert into course(courseName,courseDesc) values('$coursename','$courseDesc',)");
+$ret=mysqli_query($conn, "insert into course(courseName,courseDesc) values('$coursename','$courseDesc')");
 if($ret)
 {
 $_SESSION['msg']="Course Created Successfully !!";
@@ -27,7 +27,7 @@ else
 }
 if(isset($_GET['del']))
       {
-              mysqli_query($bd, "delete from course where id = '".$_GET['id']."'");
+              mysqli_query($conn, "delete from course where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="Course deleted !!";
       }
 ?>
@@ -130,7 +130,7 @@ if(isset($_GET['del']))
                                     </thead>
                                     <tbody>
 <?php
-$sql=mysqli_query($bd, "select * from course");
+$sql=mysqli_query($conn, "select * from course");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 {
