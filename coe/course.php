@@ -108,7 +108,7 @@ if(isset($_GET['del']))
                     </div>
                   
                 </div>
-                <font color="red" align="center"><?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?></font>
+                <font color="#85FFC7" align="center"><?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?></font>
                 <div class="col-md-12">
                     
                     <div class="panel panel-default">
