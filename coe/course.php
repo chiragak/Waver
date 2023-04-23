@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('./backend/dbconnect.php');
+$bd=$conn;
+$_SESSION['alogin']='connected';
 if(strlen($_SESSION['alogin'])==0)
     {   
 header('location:index.php');
@@ -11,9 +13,9 @@ if(isset($_POST['submit']))
 {
 
 $coursename=$_POST['coursename'];
-$coursedesc=$_POST['coursedesc'];
+$courseDesc=$_POST['courseDesc'];
 
-$ret=mysqli_query($bd, "insert into course(courseName,coursedesc) values('$coursename','$coursedesc',)");
+$ret=mysqli_query($bd, "insert into course(courseName,courseDesc) values('$coursename','$courseDesc',)");
 if($ret)
 {
 $_SESSION['msg']="Course Created Successfully !!";
@@ -93,8 +95,8 @@ if(isset($_GET['del']))
   </div>
 
 <div class="form-group">
-    <label for="coursedesc">Course Description  </label>
-    <input type="text" class="form-control" id="coursedesc" name="coursedesc" placeholder="Course Unit" required />
+    <label for="courseDesc">Course Description  </label>
+    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Unit" required />
   </div> 
 
 
@@ -138,7 +140,7 @@ while($row=mysqli_fetch_array($sql))
                                         <tr>
                                             <td><?php echo $cnt;?></td>
                                             <td><?php echo htmlentities($row['courseName']);?></td>
-                                            <td><?php echo htmlentities($row['coursedesc']);?></td>
+                                            <td><?php echo htmlentities($row['courseDesc']);?></td>
                                             <td><?php echo htmlentities($row['creationDate']);?></td>
                                             <td>
                                             <a href="edit-course.php?id=<?php echo $row['id']?>">
@@ -169,7 +171,7 @@ $cnt++;
         </div>
     </div>
     
-  <?php include('includes/footer.php');?>
+
     
     <script src="assets/js/jquery-1.11.1.js"></script>
     
