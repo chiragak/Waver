@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['alogin']='connected';
 include('includes/config.php');
 if(strlen($_SESSION['alogin'])==0)
     {   
@@ -11,11 +12,11 @@ date_default_timezone_set('Asia/Kolkata');
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 if(isset($_POST['submit']))
 {
-$coursecode=$_POST['coursecode'];
+
 $coursename=$_POST['coursename'];
-$courseunit=$_POST['courseunit'];
-$seatlimit=$_POST['seatlimit'];
-$ret=mysqli_query($bd, "update course set courseCode='$coursecode',courseName='$coursename',courseUnit='$courseunit',noofSeats='$seatlimit',updationDate='$currentTime' where id='$id'");
+$courseDesc=$_POST['courseDesc'];
+
+$ret=mysqli_query($conn, "update course set courseName='$coursename',courseDesc='$courseDesc',updationDate='$currentTime' where id='$id'");
 if($ret)
 {
 $_SESSION['msg']="Course Updated Successfully !!";
@@ -69,7 +70,7 @@ else
                         <div class="panel-body">
                        <form name="dept" method="post">
 <?php
-$sql=mysqli_query($bd, "select * from course where id='$id'");
+$sql=mysqli_query($conn, "select * from course where id='$id'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 {
@@ -86,8 +87,8 @@ while($row=mysqli_fetch_array($sql))
   </div>
 
 <div class="form-group">
-    <label for="courseunit">Course unit  </label>
-    <input type="text" class="form-control" id="courseunit" name="courseunit" placeholder="Course Unit" value="<?php echo htmlentities($row['courseUnit']);?>" required />
+    <label for="courseDesc">Course unit  </label>
+    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Unit" value="<?php echo htmlentities($row['courseDesc']);?>" required />
   </div>  
 
 <div class="form-group">
@@ -113,8 +114,7 @@ while($row=mysqli_fetch_array($sql))
 
         </div>
     </div>
-    
-  <?php include('includes/footer.php');?>
+
     
     <script src="assets/js/jquery-1.11.1.js"></script>
     
