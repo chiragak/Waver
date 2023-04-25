@@ -348,3 +348,6 @@ footer {
   color:#5cdb95;
   box-shadow: 0 2px 0 0 currentColor;
 }
+#table {
+    color: white;
+  }

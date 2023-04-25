@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['alogin']='connected';
-include('includes/config.php');
+include('./backend/dbconnect.php');
 if(strlen($_SESSION['alogin'])==0)
     {   
 header('location:index.php');
@@ -42,7 +42,7 @@ else
 </head>
 
 <body>
-<?php include('includes/header.php');?>
+
     
 <?php if($_SESSION['alogin']!="")
 {
@@ -76,10 +76,7 @@ while($row=mysqli_fetch_array($sql))
 {
 ?>
 <p><b>Last Updated at</b> :<?php echo htmlentities($row['updationDate']);?></p>
-   <div class="form-group">
-    <label for="coursecode">Course Code  </label>
-    <input type="text" class="form-control" id="coursecode" name="coursecode" placeholder="Course Code" value="<?php echo htmlentities($row['courseCode']);?>" required />
-  </div>
+   
 
  <div class="form-group">
     <label for="coursename">Course Name  </label>
@@ -87,14 +84,11 @@ while($row=mysqli_fetch_array($sql))
   </div>
 
 <div class="form-group">
-    <label for="courseDesc">Course unit  </label>
-    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Unit" value="<?php echo htmlentities($row['courseDesc']);?>" required />
+    <label for="courseDesc">Course Description  </label>
+    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Description" value="<?php echo htmlentities($row['courseDesc']);?>" required />
   </div>  
 
-<div class="form-group">
-    <label for="seatlimit">Seat limit  </label>
-    <input type="text" class="form-control" id="seatlimit" name="seatlimit" placeholder="Seat limit" value="<?php echo htmlentities($row['noofSeats']);?>" required />
-  </div>  
+
 
 
 <?php } ?>

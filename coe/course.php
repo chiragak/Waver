@@ -61,7 +61,7 @@ if(isset($_GET['del']))
 </head>
 
 <body>
-<!-- <?php include('includes/header.php');?> -->
+
     
 <?php if($_SESSION['alogin']!="")
 {
@@ -118,7 +118,7 @@ if(isset($_GET['del']))
                        
                         <div class="panel-body">
                             <div class="table-responsive table-bordered">
-                                <table class="table">
+                                <table class="table" id="table" style="color:white;">
                                     <thead>
                                         <tr>
                                             <th>#</th>
