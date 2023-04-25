@@ -1,3 +1,45 @@
+
+<?php
+session_start();
+include('backend/config.php');
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $gmail = mysqli_real_escape_string($conn,$_POST['gmail']);
+    $username = mysqli_real_escape_string($conn,$_POST['user-name']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $repassword = mysqli_real_escape_string($conn,$_POST['re-password']);
+    session_id($_POST['gmail']);
+    $_SESSION['gmail'] = $_POST['gmail'];
+    // Check if the password and confirm password match
+    if($password != $repassword) {
+        echo "<script>alert('Passwords do not match.');</script>";
+        header("refresh:0;url=signup.php");
+        exit();
+    }
+    // Check if the user already exists in the database
+    $sql = "SELECT * FROM signup WHERE gmail='$gmail'";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0) {
+        echo "<script>alert('User already exists.');</script>";
+        header("refresh:0;url=signup.php");
+        exit();
+    }
+    // Generate a random OTP
+    $otp = rand(1000, 9999);
+
+    // Insert the user details into the database
+    $sql = "INSERT INTO signup (gmail, name, password) VALUES ('$gmail', '$username', '$password')";
+    mysqli_query($conn, $sql);
+
+    // Insert the OTP into the database
+    $sql = "INSERT INTO otp (email, otp) VALUES ('$gmail', '$otp')";
+    $res=mysqli_query($conn, $sql);
+	header("Location: otp.php");
+    exit();
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -144,15 +186,15 @@
 		<div class="login-box">
 			<h1>Sign up</h1>
 			<p>Welcome Back! Login to Continue</p>
-			<form action="">
+			<form action="signup.php" method="POST">
 				<div class="input-box">
 				    <input class="in-text" type="text" name="gmail" required="required" placeholder="Enter Email" autocomplete="off" />
 					<input class="in-text" type="text" name="user-name" required="required" placeholder="Enter Username" autocomplete="off" />
 					<!-- <input class="in-text" type="password" name="" required="required" placeholder="Enter the password" /> -->
 
-					<input class="in-text" type="password" placeholder="Password" id="password" autocomplete="off" />
+					<input class="in-text" type="password" name="password"placeholder="Password" id="password" autocomplete="off" />
 
-					<input class="in-text" type="password" placeholder="Re-enter Password" id="re-password" autocomplete="off" />
+					<input class="in-text" type="password"name="re-password" placeholder="Re-enter Password" id="re-password" autocomplete="off" />
 					<img src="images/pass-hide.png" width="40px" onclick="pass()" class="pass-icon" id="pass-icon" />
 
 					<div class="bottom">
