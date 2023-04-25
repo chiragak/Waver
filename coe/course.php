@@ -96,7 +96,7 @@ if(isset($_GET['del']))
 
 <div class="form-group">
     <label for="courseDesc">Course Description  </label>
-    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Unit" required />
+    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Description" required />
   </div> 
 
 
