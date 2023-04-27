@@ -14,8 +14,26 @@ if(isset($_POST['submit']))
 
 $coursename=$_POST['coursename'];
 $courseDesc=$_POST['courseDesc'];
+$target_dir = "resources/"; // specify the directory where you want to store the uploaded file
+$target_file = $target_dir . basename($_FILES["file"]["name"]); // get the name of the uploaded file
+	$uploadOk = 1;
+	// $FileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-$ret=mysqli_query($conn, "insert into course(courseName,courseDesc) values('$coursename','$courseDesc')");
+	
+
+	
+
+    // Check if file already exists
+	if (file_exists($target_file)) {
+	    echo "Sorry, file already exists.";
+	    $uploadOk = 0;
+	}
+    else
+    {
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    }
+
+$ret=mysqli_query($conn, "insert into course(courseName,courseDesc,resource) values('$coursename','$courseDesc','$target_file')");
 if($ret)
 {
 $_SESSION['msg']="Course Created Successfully !!";
@@ -30,7 +48,12 @@ if(isset($_GET['del']))
               mysqli_query($conn, "delete from course where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="Course deleted !!";
       }
-?>
+
+
+
+
+   ?>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,21 +66,20 @@ if(isset($_GET['del']))
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
-   <style>
-    #box-head
-    {
-        background-color:#194359;
-        color:white;
-    } 
-    #submit-button 
-    {
-        background-color:#66A499;
-        border-radius:7px;
-        float:right;
-        
-    }
-    
-   </style>
+    <style>
+         #box-head
+  {
+      background-color:#194359;
+      color:white;
+  } 
+  #submit-button 
+  {
+      background-color:#66A499;
+      border-radius:7px;
+      float:right;
+      
+  }
+    </style>
 </head>
 
 <body>
@@ -87,7 +109,7 @@ if(isset($_GET['del']))
 
 
                         <div class="panel-body">
-                       <form name="dept" method="post">
+                       <form name="dept" method="post" enctype="multipart/form-data">
 
  <div class="form-group">
     <label for="coursename">Course Name  </label>
@@ -98,6 +120,12 @@ if(isset($_GET['del']))
     <label for="courseDesc">Course Description  </label>
     <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Description" required />
   </div> 
+
+  <div class="form-group">
+   <label for="file">Select file to upload:</label>
+		<input type="file" name="file" id="file"><br><br>
+  </div>
+
 
 
 
@@ -179,3 +207,7 @@ $cnt++;
 </body>
 </html>
 <?php } ?>
+
+
+
+

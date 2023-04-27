@@ -39,6 +39,20 @@ else
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+         #box-head
+  {
+      background-color:#194359;
+      color:white;
+  } 
+  #submit-button 
+  {
+      background-color:#66A499;
+      border-radius:7px;
+      float:right;
+      
+  }
+    </style>
 </head>
 
 <body>
@@ -61,7 +75,7 @@ else
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading" id="box-head">
                            Course 
                         </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
