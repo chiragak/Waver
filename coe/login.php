@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include('backend/config.php');
@@ -9,27 +7,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $gmail = mysqli_real_escape_string($conn,$_POST['name']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
     
-      $sql = "SELECT name,gmail,password FROM signup WHERE name = '$gmail' or gmail='$gmail'and password = '$password' ";
+    $sql = "SELECT name,gmail,password FROM signup WHERE (name = '$gmail' or gmail='$gmail') and password = '$password'";
       
-      $result = mysqli_query($conn,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $count = mysqli_num_rows($result);
-      // If result matched $myusername and $mypassword, table row must be 1 row
-      if($count == 1) {
-		 $gmail=$row['gmail'];
-         $_SESSION['sesname']=$gmail;
-		 alert("Login sucess");
-		 header("Location: index.php");
-		 exit();
-      }else {
-		  
-        $message = "No";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-          header("Location: login.php");
-          exit();
-      }
-	}
-?>
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $count = mysqli_num_rows($result);
+    
+    // If result matched $gmail and $password, table row must be 1 row
+    if($count == 1) {
+        $gmail = $row['gmail'];
+        $_SESSION['sesname'] = $gmail;
+        echo "<script type='text/javascript'>alert('Login success');</script>";
+        header("Location: index.php");
+        exit();
+    } else {
+        $message = "Invalid credentials";
+        header("Location: login.php?msg=invalid");
+        exit();
+    }
+}
+?> 
 
 
 <!DOCTYPE html>
@@ -235,7 +232,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					</div>
 				</div>
 				<button class="submit">LOG IN</button>
+				
+<?php
+if(isset($_GET['msg'])) {
+    $error_message = "Invalid login credentials. Please try again.";
+    echo "<p id='error-msg'>$error_message</p>";
+	
+}
+?>
 			</form>
+			
 		</div>
+		
+		<script>
+		// Wait for 3 seconds and then hide the error message
+		setTimeout(function() {
+			document.getElementById('error-msg').style.display = 'none';
+		}, 3000);
+		</script>
 	</body>
+
 </html>
+

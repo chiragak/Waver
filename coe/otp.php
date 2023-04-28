@@ -118,14 +118,28 @@ if($_SESSION['gmail']==""){
 				<input type="text" name="dig4" class="field 4" maxlength="1" />
 			</div>
 		</form>
-			<button class="resend">
+			<button  class="resend" onclick="resendOTP()">
 				Resend OTP
 				<i class="fa fa-caret-right"></i>
 			</button>
 		</div>
 		<!-- partial -->
 		<script>
-			
+		
+
+		function resendOTP() {
+    // Make an AJAX call to the PHP script
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("GET", "sendotp.php", true);
+    xhttp.send();
+}
+
+
 			  const form = document.querySelector("form");
 const inputFields = document.querySelectorAll("input.field");
 const submitButton = document.querySelector("button[type='submit']");

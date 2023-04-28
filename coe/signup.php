@@ -25,17 +25,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     // Generate a random OTP
-    $otp = rand(1000, 9999);
-
+    
+   
     // Insert the user details into the database
     $sql = "INSERT INTO signup (gmail, name, password) VALUES ('$gmail', '$username', '$password')";
     mysqli_query($conn, $sql);
 
     // Insert the OTP into the database
-    $sql = "INSERT INTO otp (email, otp) VALUES ('$gmail', '$otp')";
-    $res=mysqli_query($conn, $sql);
-	header("Location: otp.php");
-    exit();
+    include "backend/sendotp.php";
+	
     
 }
 ?>

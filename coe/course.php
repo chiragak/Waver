@@ -1,6 +1,8 @@
 <?php
 session_start();
-include('includes/config.php');
+include('./backend/dbconnect.php');
+
+$_SESSION['alogin']='connected';
 if(strlen($_SESSION['alogin'])==0)
     {   
 header('location:index.php');
@@ -11,9 +13,27 @@ if(isset($_POST['submit']))
 {
 
 $coursename=$_POST['coursename'];
-$courseunit=$_POST['courseunit'];
+$courseDesc=$_POST['courseDesc'];
+$target_dir = "resources/"; // specify the directory where you want to store the uploaded file
+$target_file = $target_dir . basename($_FILES["file"]["name"]); // get the name of the uploaded file
+	$uploadOk = 1;
+	// $FileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-$ret=mysqli_query($bd, "insert into course(courseName,courseUnit) values('$coursename','$courseunit',)");
+	
+
+	
+
+    // Check if file already exists
+	if (file_exists($target_file)) {
+	    echo "Sorry, file already exists.";
+	    $uploadOk = 0;
+	}
+    else
+    {
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    }
+
+$ret=mysqli_query($conn, "insert into course(courseName,courseDesc,resource) values('$coursename','$courseDesc','$target_file')");
 if($ret)
 {
 $_SESSION['msg']="Course Created Successfully !!";
@@ -25,10 +45,15 @@ else
 }
 if(isset($_GET['del']))
       {
-              mysqli_query($bd, "delete from course where id = '".$_GET['id']."'");
+              mysqli_query($conn, "delete from course where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="Course deleted !!";
       }
-?>
+
+
+
+
+   ?>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,24 +66,24 @@ if(isset($_GET['del']))
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
-   <style>
-    #box-head
-    {
-        background-color:#194359;
-        color:white;
-    } 
-    #submit-button 
-    {
-        background-color:#66A499;
-        border-radius:7px;
-        float:right;
-        
-    }
-   </style>
+    <style>
+         #box-head
+  {
+      background-color:#194359;
+      color:white;
+  } 
+  #submit-button 
+  {
+      background-color:#66A499;
+      border-radius:7px;
+      float:right;
+      
+  }
+    </style>
 </head>
 
 <body>
-<?php include('includes/header.php');?>
+
     
 <?php if($_SESSION['alogin']!="")
 {
@@ -84,7 +109,7 @@ if(isset($_GET['del']))
 
 
                         <div class="panel-body">
-                       <form name="dept" method="post">
+                       <form name="dept" method="post" enctype="multipart/form-data">
 
  <div class="form-group">
     <label for="coursename">Course Name  </label>
@@ -92,9 +117,15 @@ if(isset($_GET['del']))
   </div>
 
 <div class="form-group">
-    <label for="courseunit">Course Description  </label>
-    <input type="text" class="form-control" id="courseunit" name="courseunit" placeholder="Course Unit" required />
+    <label for="courseDesc">Course Description  </label>
+    <input type="text" class="form-control" id="courseDesc" name="courseDesc" placeholder="Course Description" required />
   </div> 
+
+  <div class="form-group">
+   <label for="file">Select file to upload:</label>
+		<input type="file" name="file" id="file"><br><br>
+  </div>
+
 
 
 
@@ -105,7 +136,7 @@ if(isset($_GET['del']))
                     </div>
                   
                 </div>
-                <font color="red" align="center"><?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?></font>
+                <font color="#85FFC7" align="center"><?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?></font>
                 <div class="col-md-12">
                     
                     <div class="panel panel-default">
@@ -115,7 +146,7 @@ if(isset($_GET['del']))
                        
                         <div class="panel-body">
                             <div class="table-responsive table-bordered">
-                                <table class="table">
+                                <table class="table" id="table" style="color:white;">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -127,7 +158,7 @@ if(isset($_GET['del']))
                                     </thead>
                                     <tbody>
 <?php
-$sql=mysqli_query($bd, "select * from course");
+$sql=mysqli_query($conn, "select * from course");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 {
@@ -136,10 +167,8 @@ while($row=mysqli_fetch_array($sql))
 
                                         <tr>
                                             <td><?php echo $cnt;?></td>
-                                            <td><?php echo htmlentities($row['courseCode']);?></td>
                                             <td><?php echo htmlentities($row['courseName']);?></td>
-                                            <td><?php echo htmlentities($row['courseUnit']);?></td>
-                                             <td><?php echo htmlentities($row['noofSeats']);?></td>
+                                            <td><?php echo htmlentities($row['courseDesc']);?></td>
                                             <td><?php echo htmlentities($row['creationDate']);?></td>
                                             <td>
                                             <a href="edit-course.php?id=<?php echo $row['id']?>">
@@ -170,7 +199,7 @@ $cnt++;
         </div>
     </div>
     
-  <?php include('includes/footer.php');?>
+
     
     <script src="assets/js/jquery-1.11.1.js"></script>
     
@@ -178,3 +207,7 @@ $cnt++;
 </body>
 </html>
 <?php } ?>
+
+
+
+
