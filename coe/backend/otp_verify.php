@@ -6,7 +6,8 @@ include('config.php');
 $entered_otp = $_POST['dig1'] . $_POST['dig2'] . $_POST['dig3'] . $_POST['dig4'];
 // Get the email from the form
 $email = $_SESSION['gmail'];
-
+$username = $_SESSION['username'];
+$password = $_SESSION['password'];
 // Replace with your own code to get the email from the form
 // Prepare and execute the SQL query to fetch the OTP for the given email
 $sql = "SELECT * FROM otp WHERE email = '$email' ";
@@ -14,7 +15,8 @@ $result = $conn->query($sql);
 
 // Check if there is a row with the given email in the table
 if ($result->num_rows > 0) {
-  
+  $sqlc = "INSERT INTO signup (mail, name, password) VALUES ('$email', '$username', '$password')";
+  mysqli_query($conn, $sqlc);
   // Get the OTP from the first row of the result
   $sql = "update otp set status='verified' WHERE email = '$email'";
   $conn->query($sql);
