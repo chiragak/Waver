@@ -1,3 +1,13 @@
+
+
+<?php
+session_start();
+if($_SESSION['gmail']==""){
+	header("Location: signup.php");
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -100,32 +110,91 @@
 				Enter the OTP you received to
 				<span class="mail">dummy@gmail.com</span>
 			</p>
+			<form method="POST" >
 			<div class="wrapper">
-				<input type="text" class="field 1" maxlength="1" />
-				<input type="text" class="field 2" maxlength="1" />
-				<input type="text" class="field 3" maxlength="1" />
-				<input type="text" class="field 4" maxlength="1" />
+				<input type="text" name="dig1" class="field 1" maxlength="1" />
+				<input type="text" name="dig2" class="field 2" maxlength="1" />
+				<input type="text" name="dig3" class="field 3" maxlength="1" />
+				<input type="text" name="dig4" class="field 4" maxlength="1" />
 			</div>
-			<button class="resend">
+		</form>
+			<button  class="resend" onclick="resendOTP()">
 				Resend OTP
 				<i class="fa fa-caret-right"></i>
 			</button>
 		</div>
 		<!-- partial -->
 		<script>
-			    const inputFields = document.querySelectorAll("input.field");
+		
 
-			inputFields.forEach((field) => {
-			  field.addEventListener("input", handleInput);
-			});
+		function resendOTP() {
+    // Make an AJAX call to the PHP script
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("GET", "sendotp.php", true);
+    xhttp.send();
+}
 
-			function handleInput(e) {
-			  let inputField = e.target;
-			  if (inputField.value.length >= 1) {
-			    let nextField = inputField.nextElementSibling;
-			    return nextField && nextField.focus();
-			  }
-			}
+
+			  const form = document.querySelector("form");
+const inputFields = document.querySelectorAll("input.field");
+const submitButton = document.querySelector("button[type='submit']");
+
+inputFields.forEach((field) => {
+  field.addEventListener("input", handleInput);
+});
+
+function handleInput(e) {
+  let inputField = e.target;
+  if (inputField.value.length >= 1) {
+    let allFieldsFilled = true;
+    inputFields.forEach((field) => {
+      if (field.value.length < 1) {
+        allFieldsFilled = false;
+      }
+    });
+    if (allFieldsFilled) {
+      const formData = new FormData(form);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'backend/otp_verify.php');
+	  xhr.onload = function() {
+  if (xhr.status === 200) {
+    const responseText = xhr.responseText.replace(/^Connected successfully/, '');
+    const response = JSON.parse(responseText);
+    if (response.success) {
+		
+      alert('OTP verification successful!');
+      window.location.href = 'login.php';
+    } else {
+      alert(response.message);
+    }
+  } else {
+	
+    alert('Server error. Please try again.');
+  }
+};
+
+      xhr.send(formData);
+    } else {
+      let nextField = inputField.nextElementSibling;
+      if (nextField) {
+        nextField.focus();
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
 		</script>
 	</body>
 </html>
