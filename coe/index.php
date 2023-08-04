@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<meta charset="UTF-8" />
 		<title>CoE Digital Forensics Intelligence and Cybersecurity</title>
-		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="./style.css" />
 		<style>
 			.logo
 			{
@@ -37,7 +37,7 @@
 			<div class="container">
 				<div class="logo">
 					<a href="#">
-						<img style="float:left ;margin-top: 0%;width: 67px;" src="images/Logo.png" id="Logo" />
+						<img style="float:left ;margin-top: 0%;width: 67px;" src="Logo.png" id="Logo" />
 						<h1 class="logo-title" style="float: left;font-size: 14px;margin-top: 0%; line-height: 1.6;margin-left: 3px;">
 							CoE Digital Forensics <br />
 							Intelligence & Cyber Security-SCEM
@@ -60,46 +60,26 @@
 			</div>
 		</nav>
 
-		<section class="home"></section>
-		<div style="height: 1000px">
-			<!-- just to make scrolling effect possible -->
-			<h2 class="myH2">What is this ?</h2>
-			<p class="myP">This is a responsive fixed navbar animated on scroll</p>
-			<p class="myP">
-				I took inspiration from ABDO STEIF (<a href="https://codepen.io/abdosteif/pen/bRoyMb?editors=1100">https://codepen.io/abdosteif/pen/bRoyMb?editors=1100</a>) and Dicson
-				<a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a>
-			</p>
-			<p class="myP">I HOPE YOU FIND THIS USEFULL</p>
-			<p class="myP">Albi</p>
-			<p class="myP">
-				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod
-				voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit
-				rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus
-				animi labore officiis minus laboriosam Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum
-				cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam Lorem, ipsum dolor sit amet consectetur
-				adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat,
-				tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa
-				sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus
-				laboriosam
-			</p>
-		</div>
 
-		<!-- Jquery needed -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="js/scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-		<!-- Function used to shrink nav bar removing paddings and adding black background -->
-		<script>
-			$(window).scroll(function() {
-			    if ($(document).scrollTop() > 50) {
-			        $('.nav').addClass('affix');
-			        console.log("OK");
-			    } else {
-			        $('.nav').removeClass('affix');
-			    }
-			});
-		</script>
-		<!-- partial -->
-		<script src="./script.js"></script>
-	</body>
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+
+<?php
+    include 'includes/footer.php';
+?>
+
+
+
+    
+</body>
 </html>
