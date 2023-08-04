@@ -234,11 +234,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 				<button class="submit">LOG IN</button>
 				
 <?php
-<<<<<<< HEAD
-if($_GET['msg']&& $_GET['msg'] == "invalid") {
-=======
-if(isset($_GET['msg']) && $_GET['msg']=="invalid") {
->>>>>>> 6f09d52a8109524a8edf80faf918d90b115e405c
+
+if(isset($_GET['msg'])&& $_GET['msg'] == "invalid") {
     $error_message = "Invalid login credentials. Please try again.";
     echo "<p id='error-msg'>$error_message</p>";
 	

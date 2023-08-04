@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<meta charset="UTF-8" />
 		<title>CoE Digital Forensics Intelligence and Cybersecurity</title>
-		<link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
 		<style>
 			.logo
 			{
@@ -37,7 +37,7 @@
 			<div class="container">
 				<div class="logo">
 					<a href="#">
-						<img style="float:left ;margin-top: 0%;width: 67px;" src="Logo.png" id="Logo" />
+						<img style="float:left ;margin-top: 0%;width: 67px;" src="images/Logo.png" id="Logo" />
 						<h1 class="logo-title" style="float: left;font-size: 14px;margin-top: 0%; line-height: 1.6;margin-left: 3px;">
 							CoE Digital Forensics <br />
 							Intelligence & Cyber Security-SCEM
