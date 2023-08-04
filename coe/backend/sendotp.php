@@ -22,8 +22,7 @@ if (sendOTP($email_id, $otp)) {
   $result = mysqli_query($conn, $sql);
   $count = mysqli_num_rows($result);
 
-  $sqlc = "INSERT INTO signup (mail, name, password) VALUES ('$gmail', '$username', '$password')";
-  mysqli_query($conn, $sqlc);
+
   if ($count == 1) {
       $sql = "UPDATE otp SET otp = '$otp' WHERE email = '$email_id'";
       mysqli_query($conn, $sql);
