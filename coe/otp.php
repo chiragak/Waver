@@ -166,12 +166,14 @@ function handleInput(e) {
     const responseText = xhr.responseText.replace(/^Connected successfully/, '');
     const response = JSON.parse(responseText);
     if (response.success) {
+		
       alert('OTP verification successful!');
       window.location.href = 'login.php';
     } else {
       alert(response.message);
     }
   } else {
+	
     alert('Server error. Please try again.');
   }
 };

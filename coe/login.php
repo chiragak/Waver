@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $gmail = mysqli_real_escape_string($conn,$_POST['name']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
     
-    $sql = "SELECT name,gmail,password FROM signup WHERE (name = '$gmail' or gmail='$gmail') and password = '$password'";
+    $sql = "SELECT name,mail,password FROM signup WHERE (name = '$gmail' or mail='$gmail') and password = '$password'";
       
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -234,7 +234,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 				<button class="submit">LOG IN</button>
 				
 <?php
-if(isset($_GET['msg'])) {
+if($_GET['msg']=="invalid") {
     $error_message = "Invalid login credentials. Please try again.";
     echo "<p id='error-msg'>$error_message</p>";
 	

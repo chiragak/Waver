@@ -8,6 +8,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($conn,$_POST['user-name']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
     $repassword = mysqli_real_escape_string($conn,$_POST['re-password']);
+	$_SESSION['gmail'] = $gmail;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;
     session_id($_POST['gmail']);
     $_SESSION['gmail'] = $_POST['gmail'];
     // Check if the password and confirm password match
@@ -17,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     // Check if the user already exists in the database
-    $sql = "SELECT * FROM signup WHERE gmail='$gmail'";
+    $sql = "SELECT * FROM signup WHERE mail='$gmail'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0) {
         echo "<script>alert('User already exists.');</script>";
@@ -28,8 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
    
     // Insert the user details into the database
-    $sql = "INSERT INTO signup (gmail, name, password) VALUES ('$gmail', '$username', '$password')";
-    mysqli_query($conn, $sql);
+  
 
     // Insert the OTP into the database
     include "backend/sendotp.php";
